@@ -1,0 +1,17 @@
+body {
+ background-color: aquamarine;
+ text-align: center;
+}
+H1 {
+ font-family: arial;
+ font-weight: bold;
+}
+input, select, button, {
+  width : 300px;
+  margin: 0;
+}
+p {
+    padding-top: 10px;
+    
+}
+    

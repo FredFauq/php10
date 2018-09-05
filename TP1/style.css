@@ -1,0 +1,19 @@
+body {
+ background-color: aquamarine;
+}
+H1 {
+ font-family: arial;
+ font-weight: bold;
+ text-align: center;
+}
+input, textarea, select, button, {
+  width : 300px;
+  margin: 0;
+}
+form {
+    text-align: center;
+}
+p {
+    text-align: center;
+}
+    
