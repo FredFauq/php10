@@ -1,3 +1,7 @@
+<?php
+//insere le controleur avec le code PHP principal
+include 'controllerForm.php'
+?>
 <!DOCTYPE html>
 <html lang = "fr">
     <head>
@@ -17,81 +21,54 @@
                 <div class= "col-md-12">
                     <h1>VOTRE PROFIL</h1>
                     <form method="post" action="index.php" enctype ="multipart/form-data">
-                        <?php
-                        // on vérifie que les champs ont été remplis
-                        //if (!empty($_POST)) {
-                        ?>
                         <div  class="form-group">      
                             <label for="civility">Civilité</label>
                             <select name="civility" id="civility">
                                 <option selected disabled>Veuillez selectionner une option</option> 
-                                <option value="M."<?php
-                                /*  si la variable existe et qu'elle a la même valeur 
-                                  que ce champs alors lui mettre l'attribue selected */;
-                                if (isset($_POST['civility']) && $_POST['civility'] == 'M.') {
-                                    echo 'selected';
-                                }
-                                ?>>M.</option>
-                                <option value="Mme"<?php
-                                /*  si la variable existe et qu'elle a la même valeur 
-                                  que ce champs alors lui mettre l'attribue selected */;
-                                if (isset($_POST['civility']) && $_POST['civility'] == 'Mme') {
-                                    echo 'selected';
-                                }
-                                ?>>Mme</option>
+                                <option value="<?php isset($civility) ? $civility : ''; ?>" >M.</option>
+                                <option value="<?php isset($civility) ? $civility : ''; ?>" >Mme</option>
+                                <p class="text-danger"><?= isset($formError['civility']) ? $formError['civility'] : ''; ?></p>
                             </select>
                         </div>
                         <div  class="form-group">
                             <!-- Ajout des inputs avec leurs labels -->
                             <label for="lastname">Nom :</label>
-                            <input type="text" value= "<?php
-                            //  si la variable existe alors le champs aurat comme valeur celle de cette variable;
-                            if (isset($_POST['lastname'])) {
-                                echo $_POST['lastname'];
-                            }
-                            ?>" name= "lastname" id= "lastname" placeholder="Dupont" required>
+                            <input type="text" value= "<?php isset($lastname) ? $lastname : ''; ?>" name= "lastname" id= "lastname" placeholder="Dupont" required>
+                            <p class="text-danger"><?= isset($formError['lastname']) ? $formError['lastname'] : ''; ?></p>
                         </div>
                         <div  class="form-group">
                             <label for="firstname">Prénom :</label>
-                            <input type="text" value= "<?php
-                            //  si la variable existe alors le champs aurat comme valeur celle de cette variable;
-                            if (isset($_POST['firstname'])) {
-                                echo $_POST['firstname'];
-                            }
-                            ?>" name= "firstname" id= "firstname" placeholder= "Jean" required>
+                            <input type="text" value= "<?php isset($firstname) ? $firstname : ''; ?>" name= "firstname" id= "firstname" placeholder= "Jean" required>
+                            <p class="text-danger"><?= isset($formError['firstname']) ? $formError['firstname'] : ''; ?></p>
                         </div>    
                         <div  class="form-group">
                             <label for="age">Age :</label>
-                            <input type="text" value= "<?php
-                            //  si la variable existe alors le champs aurat comme valeur celle de cette variable;
-                            if (isset($_POST['age'])) {
-                                echo $_POST['age'];
-                            }
-                            ?>" name= "age" id= "age" placeholder= "25" required>
+                            <input type="text" value= "<?php isset($age) ? $age : ''; ?>" name= "age" id= "age" placeholder= "25" required>
+                            <p class="text-danger"><?= isset($formError['age']) ? $formError['age'] : ''; ?></p>
                         </div>
                         <div  class="form-group">
                             <label for="company">Société :</label>
-                            <input type="text" value= "<?php
-                            //  si la variable existe alors le champs aurat comme valeur celle de cette variable;
-                            if (isset($_POST['company'])) {
-                                echo $_POST['company'];
-                            }
-                            ?>" name= "company" id= "company" placeholder= "nom de société" required>
+                            <input type="text" value= "<?php isset($company) ? $company : ''; ?>" name= "company" id= "company" placeholder= "nom de société" required>
+                            <p class="text-danger"><?= isset($formError['company']) ? $formError['company'] : ''; ?></p>
                             <div>
                                 <!-- Bouton Submit de validation du formulaire pour l'envoi des données -->
-                                <button type="submit" name="validate" action="index.php">Envoyer</button>
+                                <button type="submit" name="submit" action="index.php">Envoyer</button>
                             </div>
+                        </div>
                     </form>
-                    <!-- Affichage des données du formulaire -->
-                    <div>    
-                        <p>Civilité : <?= $_POST['civility']; ?></p>
-                        <p>Nom : <?= $_POST['lastname']; ?></p>
-                        <p>Prenom : <?= $_POST['firstname']; ?></p>
-                        <p>Âge : <?= $_POST['age']; ?></p>
-                        <p>société : <?= $_POST['company']; ?></p>
-                    </div>
+                    <?php if (isset($_POST['submit']) && (count($formError) === 0)) { ?>
+                        <!-- Affichage des données du formulaire -->
+                        <div>    
+                            <p>Civilité : <?= $civility; ?></p>
+                            <p>Nom : <?= $lastname; ?></p>
+                            <p>Prenom : <?= $firstname; ?></p>
+                            <p>Âge : <?= $age; ?></p>
+                            <p>société : <?= $company; ?></p>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
-        </div>
     </body>
 </html>
