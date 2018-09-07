@@ -1,3 +1,6 @@
 body {
  background-color: aquamarine;
+ background-image: url("Bibliothèque_de_Sélestat.jpg");
+ color: white;
+ font-weight: bold;
 }
